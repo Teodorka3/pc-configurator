@@ -181,6 +181,11 @@
 
   function productImage(item) {
     if (cache.has(item.id)) return cache.get(item.id);
+    const photo = window.productPhotos && window.productPhotos[item.id];
+    if (photo) {
+      cache.set(item.id, photo);
+      return photo;
+    }
     const p = palette(item.brand || item.name);
     const art = (DRAW[item.category] || cpu)(item, p);
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="300" height="180">
