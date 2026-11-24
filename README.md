@@ -11,7 +11,7 @@
 - Сборка: по одному компоненту на категорию, клик по карточке добавляет/убирает.
 - Проверка совместимости: сокет CPU↔плата, тип ОЗУ, сокет и мощность кулера, форм-фактор корпуса, длина видеокарты, рекомендуемая мощность БП.
 - Сохранение сборки в `localStorage` (кнопки «Сохранить» / «Загрузить»).
-- Реклама **Яндекс.Реклама AutoPlacement** (page-id `20496465`) уже подключена.
+- Реклама **Яндекс.Реклама AutoPlacement** (page-id `20496693`) уже подключена.
 
 ## Реклама
 
@@ -19,7 +19,7 @@
 
 ```html
 <script src="https://yandex.ru/ads/system/context.js" async></script>
-<script data-page-id="20496465" src="https://yandex.ru/ads/system/ap-loader.js" async></script>
+<script data-page-id="20496693" src="https://yandex.ru/ads/system/ap-loader.js" async></script>
 ```
 
 Яндекс сам выбирает места для рекламных блоков, поэтому наши демо-баннеры в этом режиме скрыты. Настройки лежат в `ads.js`:
@@ -27,7 +27,7 @@
 ```js
 const CONFIG = {
   mode: 'yandex',  // 'yandex' | 'demo' | 'adsense' | 'custom'
-  yandexPageId: '20496465',
+  yandexPageId: '20496693',
   adsenseClient: 'ca-pub-XXXXXXXXXXXXXXXX',
   slots: {
     header: '0000000000',
