@@ -1,14 +1,15 @@
 /*
  * Рекламный слой конфигуратора.
- * По умолчанию включён DEMO-режим: баннеры крутятся локально, без сети.
- * Чтобы подключить реальную рекламу, заполните конфиг ниже (AdSense или свой HTML).
- * ВАЖНО: AdSense работает только на реальном домене по HTTPS, не с file://.
+ * Сейчас включён Яндекс.Реклама (AutoPlacement) — скрипты подключены в index.html.
+ * Демо-баннеры в этом режиме не показываются, чтобы не дублировать рекламу.
+ * Доступные режимы: 'yandex' | 'demo' | 'adsense' | 'custom'.
  */
 (function () {
   'use strict';
 
   const CONFIG = {
-    mode: 'demo',            // 'demo' | 'adsense' | 'custom'
+    mode: 'yandex',          // 'yandex' | 'demo' | 'adsense' | 'custom'
+    yandexPageId: '20496465',
     adsenseClient: 'ca-pub-XXXXXXXXXXXXXXXX',
     slots: {
       header: '0000000000',
@@ -60,6 +61,13 @@
   function render(host) {
     const name = host.getAttribute('data-ad-slot') || 'header';
     host.innerHTML = '';
+
+    if (CONFIG.mode === 'yandex') {
+      // Яндекс AutoPlacement вставляет блоки сам, наши заглушки скрываем.
+      host.hidden = true;
+      return;
+    }
+    host.hidden = false;
 
     if (CONFIG.mode === 'adsense') {
       host.appendChild(adsenseSlot(name));
