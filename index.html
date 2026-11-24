@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCBuilder — конфигуратор ПК</title>
+  <meta name="description" content="Конфигуратор ПК с большим каталогом комплектующих, проверкой совместимости и подсказками по блоку питания.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#" id="homeLink"><span class="logo-mark">PC</span> <span>PCBuilder</span></a>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Поиск: RTX 4070, Ryzen 7800X3D, DDR5..." autocomplete="off">
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost" id="resetBtn">Очистить сборку</button>
+      <button class="btn ghost" id="saveBtn">Сохранить</button>
+      <button class="btn ghost" id="loadBtn">Загрузить</button>
+    </div>
+  </header>
+
+  <div class="ad-slot ad-header" data-ad-slot="header"></div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-title">Каталог</div>
+      <nav id="categoryNav" class="cat-nav"></nav>
+      <div class="ad-slot ad-side" data-ad-slot="sidebar"></div>
+      <div class="side-note">Цены ориентировочные, в ₽. Совместимость проверяется автоматически.</div>
+    </aside>
+
+    <main class="content">
+      <div class="hero">
+        <div>
+          <h1>Собери свой ПК</h1>
+          <p id="heroSub">Выбирай комплектующие — мы подскажем, что не подходит.</p>
+        </div>
+        <div class="hero-stat"><strong id="itemCount">0</strong><span>комплектующих</span></div>
+      </div>
+
+      <section class="filters">
+        <div class="filter-row">
+          <label>Бренд <select id="brandFilter"><option value="">Все</option></select></label>
+          <label>Сортировка
+            <select id="sortFilter">
+              <option value="popular">Популярные</option>
+              <option value="cheap">Сначала дешёвые</option>
+              <option value="expensive">Сначала дорогие</option>
+              <option value="name">По названию</option>
+            </select>
+          </label>
+          <label>До <input id="priceFilter" type="number" min="0" step="1000" placeholder="₽"></label>
+          <button class="btn tiny" id="applyFilters">Применить</button>
+        </div>
+      </section>
+
+      <div id="catalog" class="catalog"></div>
+      <div id="emptyState" class="empty" hidden>Ничего не найдено. Попробуй другой запрос или сбрось фильтры.</div>
+    </main>
+
+    <aside class="build-panel" id="buildPanel">
+      <div class="build-head">
+        <div><span class="build-kicker">Твоя сборка</span><h2 id="buildTotal">0 ₽</h2></div>
+        <button class="icon-btn" id="hideBuild" title="Свернуть">×</button>
+      </div>
+      <div class="power-line">
+        <span>Ориентировочная мощность</span>
+        <strong id="powerValue">0 Вт</strong>
+      </div>
+      <div class="power-bar"><div id="powerBar"></div></div>
+      <div id="compatBox" class="compat"></div>
+      <div id="buildList" class="build-list"></div>
+      <div class="ad-slot ad-foot-mini" data-ad-slot="footer"></div>
+      <button class="btn primary wide" id="finishBtn">Проверить сборку</button>
+    </aside>
+  </div>
+
+  <div class="ad-slot ad-footer" data-ad-slot="footer"></div>
+
+  <footer class="footer">
+    <span>PCBuilder · демонстрационный конфигуратор</span>
+    <span>Реклама: <button class="link-btn" id="adModeBtn">DEMO</button></span>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="buyModal" class="modal" hidden>
+    <div class="modal-backdrop" data-buy-close></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="build-kicker">Где купить</span>
+          <h3 id="buyTitle"></h3>
+        </div>
+        <button class="icon-btn" data-buy-close title="Закрыть">×</button>
+      </div>
+      <div id="buyPrice" class="buy-price"></div>
+      <p class="buy-hint">Откроется поиск товара в магазине. Цены и наличие — на сайте магазина.</p>
+      <div id="storeList" class="store-list"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="images.js"></script>
+  <script src="ads.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
