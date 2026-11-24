@@ -1,14 +1,20 @@
 /*
  * Рекламный слой конфигуратора.
- * Сейчас включён Яндекс.Реклама (AutoPlacement) — скрипты подключены в index.html.
- * Демо-баннеры в этом режиме не показываются, чтобы не дублировать рекламу.
- * Доступные режимы: 'yandex' | 'demo' | 'adsense' | 'custom'.
+ * Сейчас включён Adsterra: коды блоков вставлены статически в index.html.
+ * Динамические слоты в ленте скрываются, чтобы не дублировать рекламу.
+ * Доступные режимы: 'adsterra' | 'yandex' | 'demo' | 'adsense' | 'custom'.
  */
 (function () {
   'use strict';
 
   const CONFIG = {
-    mode: 'yandex',          // 'yandex' | 'demo' | 'adsense' | 'custom'
+    mode: 'adsterra',
+    adsterra: {
+      header: { key: '97564551c7f6041b767137fb4d5a5125', width: 728, height: 90 },
+      sidebar: { key: 'decd2bd36276950022ef50d9d8582986', width: 300, height: 250 },
+      footerMini: { key: '987b86fdf7f0c07c8962a876198e30e8', width: 320, height: 50 },
+      native: { key: 'bfeefa9aee8f6670a3e5705bb8bf9305', container: 'container-bfeefa9aee8f6670a3e5705bb8bf9305' }
+    },
     yandexPageId: '20496693',
     adsenseClient: 'ca-pub-XXXXXXXXXXXXXXXX',
     slots: {
@@ -59,6 +65,13 @@
   }
 
   function render(host) {
+    if (CONFIG.mode === 'adsterra') {
+      // Статические блоки уже встроены в HTML — не трогаем их.
+      if (host.hasAttribute('data-ad-static')) return;
+      host.hidden = true;
+      return;
+    }
+
     const name = host.getAttribute('data-ad-slot') || 'header';
     host.innerHTML = '';
 
